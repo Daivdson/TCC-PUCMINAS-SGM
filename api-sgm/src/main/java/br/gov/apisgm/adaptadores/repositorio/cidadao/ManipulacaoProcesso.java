@@ -4,9 +4,7 @@ import java.util.List;
 
 import br.gov.apisgm.aplicacao.dominio.Processo;
 import br.gov.apisgm.aplicacao.repositorio.RepositorioProcesso;
-import lombok.extern.slf4j.Slf4j;
 
-@Slf4j
 public class ManipulacaoProcesso implements RepositorioProcesso {
 	
 	private PersistenciaProcesso reposi;
@@ -36,22 +34,5 @@ public class ManipulacaoProcesso implements RepositorioProcesso {
 		return reposi.save(processo);
 	}
 
-	@Override
-	public boolean aprovarProcesso(String idProcesso) {
-		
-		try {
-			Processo processo = reposi.findById(idProcesso).get();
-			
-			processo.aprovado();
-			
-			reposi.save(processo);
-			
-			return true;
-			
-		} catch (Exception e) {
-			log.error("Erro ao aprovar processo: "+e.getMessage());
-			return false;
-		}
-	}
 
 }

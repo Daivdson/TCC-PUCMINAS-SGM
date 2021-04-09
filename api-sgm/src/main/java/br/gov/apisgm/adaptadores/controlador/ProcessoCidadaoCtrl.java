@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PatchMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -16,6 +17,9 @@ import org.springframework.web.bind.annotation.RestController;
 
 import br.gov.apisgm.aplicacao.api.ServicoProcesso;
 import br.gov.apisgm.aplicacao.dominio.Processo;
+import io.swagger.annotations.ApiOperation;
+import io.swagger.annotations.ApiParam;
+import io.swagger.annotations.Authorization;
 import springfox.documentation.spring.web.json.Json;
 
 
@@ -58,7 +62,9 @@ public class ProcessoCidadaoCtrl {
 	}
 	
 	@PatchMapping(value = { "/{idProcesso}/aprovar" })
-	public @ResponseBody ResponseEntity<?> aprovarProceso(@PathVariable String idProcesso) {
+	@PreAuthorize("hasRole('role_admin')")
+	@ApiOperation(value = "${ProcessoCidadaoCtrl.aprovarProceso}", response = ResponseEntity.class, authorizations = { @Authorization(value="apiKey") })
+	public @ResponseBody ResponseEntity<?> aprovarProceso(@ApiParam("Username") @PathVariable String idProcesso) {
 		if(idProcesso == null) {
 			return new ResponseEntity<>(new Json("{\"Id do processo não informado\"}"), HttpStatus.BAD_REQUEST);
 		}

@@ -1,5 +1,9 @@
 package br.gov.apisgm.aplicacao.dominio;
 
+import java.time.LocalDate;
+import java.time.ZoneId;
+import java.util.Date;
+
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
@@ -23,6 +27,16 @@ public class Processo {
 	
 	public void aprovado() {
 		this.status = StatusProcesso.aprovado;
+		this.dataAprovacao = LocalDate.now().toString();
+	}
+	
+	public void analise() {
+		this.status = StatusProcesso.analise;
+	}
+	
+	
+	public String getDataCriacao() {
+		return LocalDate.now().toString();
 	}
 
 }

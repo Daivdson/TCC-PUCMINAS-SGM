@@ -1,6 +1,7 @@
 package br.gov.apisgm.seguranca;
 
 import javax.servlet.http.HttpServletRequest;
+import java.util.Arrays;
 
 import java.net.URI;
 
@@ -35,11 +36,14 @@ public class JwtTokenProvider {
 
 	  public Authentication getAutenticacao(String token) {
 		    Usuario usuario = consultaToken(token);
-		    
+		    if(usuario == null ) {
+		    	return null;
+		    }
 		    UserDetails userDetails = User
 		    .withUsername(token)
 		    .username(usuario.getNome())
-		    .authorities(usuario.getRoles())
+		    .authorities(usuario.getRoles().toString())
+		    .roles(usuario.getRoles().toString())
 		    .password("teste")
 		    .accountExpired(false)
 		    .accountLocked(false)
