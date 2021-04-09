@@ -1,0 +1,42 @@
+{
+  "desenvolvimento": {
+    "ambiente": "desenvolvimento",
+    "host": "http://localhost",
+    "porta": 3000,
+    "baseUrl": "/sgm-autenticacao/api",
+    "secretJWT": "961277a4237ade9bbbdf00c96211ef41",
+    "conexaoBanco":{
+      "urlConexao": "mongodb://usr_sgm:12345678@localhost:27017/sgm?authSource=admin"
+    }
+  },
+  "teste": {
+    "ambiente": "teste",
+    "host": "http://localhost",
+    "porta": 3000,
+    "baseUrl": "/sgm-autenticacao/api",
+    "secretJWT": "secret",
+    "conexaoBanco":{
+      "urlConexao": "teste"
+    }
+  },
+  "homologacao": {
+    "host": "http://localhost",
+    "path": "autenticacao",
+    "porta": 3000,
+    "baseUrl": "/sgm-autenticacao/api",
+    "secretJWT": "secret",
+    "conexaoBanco":{
+      "urlConexao": "url homologacao"
+    }
+  },
+  "production": {
+    "ambiente": "producao",
+    "host": "http://localhost",
+    "porta": 3000,
+    "baseUrl": "/sgm-autenticacao/api",
+    "secretJWT": "scret",
+    "conexaoBanco":{
+      "urlConexao": "url producao"
+    }
+  }
+}

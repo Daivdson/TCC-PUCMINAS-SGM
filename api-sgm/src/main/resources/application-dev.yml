@@ -1,0 +1,22 @@
+server:
+  use-forward-headers: true
+  port: 8090
+  servlet:
+    context-path: /sgm  
+    
+logging:
+  level:
+    org.springframework.jdbc.core.JdbcTemplate: debug
+    org.keycloak: debug
+
+spring:
+  data:
+    mongodb:
+      uri: mongodb://usr_sgm:12345678@localhost:27017/sgm?authSource=admin
+
+security:
+  jwt:
+    url: http://localhost:3000/sgm-autenticacao/api
+    token:
+      secret-key: 961277a4237ade9bbbdf00c96211ef41
+      expire-length: 300000 # 5 minutes duration by default: 5 minutes * 60 seconds * 1000 miliseconds
