@@ -30,13 +30,13 @@ public class CidadaoCtrl {
 	public @ResponseBody ResponseEntity<?> iptu(Integer inscricao) { 
 		
 		if(inscricao == null) {
-			return new ResponseEntity<>(new Json("{\"erro\": \"Inscrição não informado\"}"), HttpStatus.BAD_REQUEST);
+			return new ResponseEntity<>(new Json("{\"error\": \"Inscrição não informado\"}"), HttpStatus.BAD_REQUEST);
 		}
 		
 		Iptu resultado = servico.iptuCidadao(inscricao);
 		
 		if(resultado == null) {
-			return new ResponseEntity<>(new Json("{\"erro\": \"iptu não encontrado\"}"), HttpStatus.OK);
+			return new ResponseEntity<>(new Json("{\"error\": \"iptu não encontrado\"}"), HttpStatus.OK);
 		} 
 				
 		return new ResponseEntity<>(resultado, HttpStatus.OK);
@@ -46,13 +46,13 @@ public class CidadaoCtrl {
 	public @ResponseBody ResponseEntity<?> itr(Integer nirt) { 
 		
 		if(nirt == null) {
-			return new ResponseEntity<>(new Json("{\"erro\": \"Itr não informado\"}"), HttpStatus.BAD_REQUEST);
+			return new ResponseEntity<>(new Json("{\"error\": \"Itr não informado\"}"), HttpStatus.BAD_REQUEST);
 		}
 		
 		Itr resultado = servico.itrCidadao(nirt);
 
 		if(resultado == null) {
-			return new ResponseEntity<>(new Json("{\"erro\": \"Itr não encontrado\"}"), HttpStatus.OK);
+			return new ResponseEntity<>(new Json("{\"error\": \"Itr não encontrado\"}"), HttpStatus.OK);
 		} 
 		
 		return new ResponseEntity<>(resultado, HttpStatus.OK);

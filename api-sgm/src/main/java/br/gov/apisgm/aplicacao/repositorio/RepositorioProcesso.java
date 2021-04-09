@@ -14,6 +14,4 @@ public interface RepositorioProcesso {
 
 	Processo alterarProcesso(Processo processo);
 
-	boolean aprovarProcesso(String idProcesso);
-
 }

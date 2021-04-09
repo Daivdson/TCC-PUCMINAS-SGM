@@ -4,7 +4,9 @@ import java.util.List;
 
 import br.gov.apisgm.aplicacao.dominio.Processo;
 import br.gov.apisgm.aplicacao.repositorio.RepositorioProcesso;
+import lombok.extern.slf4j.Slf4j;
 
+@Slf4j
 public class ServicoProcesso {
 	
 	private RepositorioProcesso repositorio;
@@ -26,16 +28,30 @@ public class ServicoProcesso {
 
 	public Processo novoProcesso(Processo processo) {
 		System.out.println("novo processo");
+		processo.analise();
 		return repositorio.novoProcesso(processo);
 	}
 
 	public Processo alterarProcesso(Processo processo) {
-		
+		processo.analise();
 		return repositorio.alterarProcesso(processo);
 	}
 
 	public boolean aprovarProcesso(String idProcesso) {
-		return repositorio.aprovarProcesso(idProcesso);
+		
+		try {
+			Processo processo = processoPorId(idProcesso);
+			
+			processo.aprovado();
+			
+			alterarProcesso(processo);
+			
+			return true;
+			
+		} catch (Exception e) {
+			log.error("Erro ao aprovar processo: "+e.getMessage());
+			return false;
+		}
 	}
 	
 	
