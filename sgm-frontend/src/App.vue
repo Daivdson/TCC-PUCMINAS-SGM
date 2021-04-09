@@ -83,8 +83,19 @@ export default {
   methods: {
     logOut() {
       this.$store.dispatch('auth/logout');
-      this.$router.push('/login');
+      this.$router.push('/home');
     }
   }
 };
 </script>
+<style >
+.jumbotron {
+  padding: 2rem 2rem!important;
+}
+.borda {
+    padding: 1.5rem;
+    border-radius: 10px;
+    border: 1px solid;
+    border-color: #ccc; 
+}
+</style>

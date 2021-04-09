@@ -21,7 +21,7 @@ class Sgm {
 
     alterarProcesso(processo) {
         return axios.request({
-            url: API_URL + 'processo/' + processo.id,
+            url: API_URL + 'processo/',
             method: 'put',
             headers: authHeader,
             data: processo
@@ -33,10 +33,23 @@ class Sgm {
         })
     }
 
-    processo(numProcesso) {
+    aprovarProcesso(numProcesso) {
+        return axios.request({
+            url: API_URL + 'processo/' + numProcesso + 'aprovar',
+            method: 'patch',
+            headers: authHeader
+          })
+        .then(response => {
+            return response.data;
+        }).catch(error => {
+            return {error: error}
+        })
+    }
+
+    pesquisarProcesso(numProcesso) {
         return axios.request({
             url: API_URL + 'processo/' + numProcesso,
-            method: 'put',
+            method: 'get',
             headers: authHeader
           })
         .then(response => {
@@ -52,32 +65,6 @@ class Sgm {
             method: 'get',
             headers: authHeader
           })
-        .then(response => {
-            return response.data;
-        }).catch(error => {
-            return {error: error}
-        })
-    }
-
-    getItr(nirt) {
-        return axios.get(API_URL + '/cidadao/itr',{
-            params: {
-                nirt: nirt
-            }
-          })
-        .then(response => {
-            return response.data;
-        }).catch(error => {
-            return {error: error}
-        })
-    }
-    
-    getIptu(inscricao) {
-        return axios.get(API_URL + '/cidadao/iptu', {
-            params: {
-                inscricao : inscricao
-            }
-        })
         .then(response => {
             return response.data;
         }).catch(error => {
