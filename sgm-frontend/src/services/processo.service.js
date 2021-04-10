@@ -7,7 +7,7 @@ const API_URL = profile.urlApiSgm;
 class Sgm {
     criarProcesso(processo) {
         return axios.request({
-            url: API_URL + 'processo',
+            url: API_URL + '/processo',
             method: 'post',
             headers: authHeader,
             data: processo
@@ -20,9 +20,9 @@ class Sgm {
     }
 
     alterarProcesso(processo) {
-        return axios.request({
-            url: API_URL + 'processo/',
-            method: 'put',
+        console.log(authHeader)
+        console.log(processo)
+        return axios.put(API_URL + '/processo/',{
             headers: authHeader,
             data: processo
           })
@@ -35,7 +35,7 @@ class Sgm {
 
     aprovarProcesso(numProcesso) {
         return axios.request({
-            url: API_URL + 'processo/' + numProcesso + 'aprovar',
+            url: API_URL + '/processo/' + numProcesso + 'aprovar',
             method: 'patch',
             headers: authHeader
           })
@@ -48,7 +48,7 @@ class Sgm {
 
     pesquisarProcesso(numProcesso) {
         return axios.request({
-            url: API_URL + 'processo/' + numProcesso,
+            url: API_URL + '/processo/' + numProcesso,
             method: 'get',
             headers: authHeader
           })
@@ -60,9 +60,7 @@ class Sgm {
     }
 
     todosProcesso() {
-        return axios.request({
-            url: API_URL + 'processo/',
-            method: 'get',
+        return axios.get(API_URL + '/processo/',{
             headers: authHeader
           })
         .then(response => {
