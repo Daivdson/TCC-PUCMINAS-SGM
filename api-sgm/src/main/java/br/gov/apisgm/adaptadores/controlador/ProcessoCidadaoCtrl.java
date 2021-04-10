@@ -5,6 +5,7 @@ import java.util.List;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PatchMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -24,6 +25,7 @@ import springfox.documentation.spring.web.json.Json;
 
 
 @RestController
+@CrossOrigin
 @RequestMapping(value = "api/processo", produces = { "application/json" })
 public class ProcessoCidadaoCtrl {
 
@@ -34,13 +36,13 @@ public class ProcessoCidadaoCtrl {
 		this.servico = servico;
 	}
 
-	@GetMapping(value = { "/" })
+	@GetMapping(value = { "/" }, produces = {"application/json"})
 	public @ResponseBody ResponseEntity<?> processo() { 
 		List<Processo> resultado = servico.todosProcessos();
 		return new ResponseEntity<>(resultado, HttpStatus.OK);
 	}
 	
-	@GetMapping(value = { "/{idProcesso}" })
+	@GetMapping(value = { "/{idProcesso}" }, produces = {"application/json"})
 	public @ResponseBody ResponseEntity<?> processoPorId(@PathVariable("") String idProcesso) {
 		if(idProcesso == null) {
 			return new ResponseEntity<>(new Json("{\"Id do processo não informado\"}"), HttpStatus.BAD_REQUEST);
