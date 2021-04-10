@@ -6,11 +6,7 @@ const ModeloUsuario = require('../modelo/usuario');
 router.post('/', async (req, res) => {
     try {
       const result = await ModeloUsuario.create(req.body)
-      const { senha, ...usuario } = result.toObject()
-  
-      const token = jwt.sign({ user: usuario.id })
-  
-      res.send({ usuario, token })
+      res.status(201).send('Usuario cadastrado' )
     } catch (error) {
         console.error(error)
         res.status(400).send(error)

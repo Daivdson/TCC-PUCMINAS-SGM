@@ -8,7 +8,7 @@
       />
       <form name="form" @submit.prevent="handleLogin">
         <div class="form-group">
-          <label for="username">Username</label>
+          <label for="username">Usuário</label>
           <input
             v-model="user.username"
             v-validate="'required'"
@@ -23,7 +23,7 @@
           >Username is required!</div>
         </div>
         <div class="form-group">
-          <label for="password">Password</label>
+          <label for="password">Senha</label>
           <input
             v-model="user.password"
             v-validate="'required'"

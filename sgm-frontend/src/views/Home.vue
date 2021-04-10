@@ -1,13 +1,13 @@
 <template>
   <div class="container">
     <header class="jumbotron">
-      <h3>{{content}}</h3>
+      <h3>Prefeitura</h3>
+      <p>Portal da prefeitura bom Destino</p>
     </header>
   </div>
 </template>
 
 <script>
-import UserService from '../services/user.service';
 
 export default {
   name: 'Home',
@@ -16,18 +16,5 @@ export default {
       content: 'Prefeitura Bom Destino'
     };
   },
-  mounted() {
-    UserService.getPublicContent().then(
-      response => {
-        this.content = response.data;
-      },
-      error => {
-        this.content =
-          (error.response && error.response.data && error.response.data.message) ||
-          error.message ||
-          error.toString();
-      }
-    );
-  }
 };
 </script>
