@@ -15,7 +15,6 @@ import springfox.documentation.spring.web.json.Json;
 
 
 @RestController
-@CrossOrigin
 @RequestMapping(value = "api/cidadao", produces = { "application/json" })
 public class CidadaoCtrl {
 

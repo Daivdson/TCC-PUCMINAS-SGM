@@ -1,9 +1,8 @@
 package br.gov.apisgm.seguranca;
 
-import javax.servlet.http.HttpServletRequest;
-import java.util.Arrays;
-
 import java.net.URI;
+
+import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.HttpMethod;

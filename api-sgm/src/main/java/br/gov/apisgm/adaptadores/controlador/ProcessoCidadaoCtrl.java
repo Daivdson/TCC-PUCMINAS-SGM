@@ -51,13 +51,13 @@ public class ProcessoCidadaoCtrl {
 		return new ResponseEntity<>(resultado, HttpStatus.OK);
 	}
 	
-	@PostMapping(value = { "/" })
+	@PostMapping(value = { "/" }, produces = {"application/json"})
 	public @ResponseBody ResponseEntity<?> novoProcesso(@RequestBody Processo processo) {
 		Processo resultado = servico.novoProcesso(processo);
 		return new ResponseEntity<>(resultado, HttpStatus.OK);
 	}
 	
-	@PutMapping(value = { "/" })
+	@PutMapping(value = { "/" }, produces = {"application/json"})
 	public @ResponseBody ResponseEntity<?> alterarProcesso(@RequestBody Processo processo) {
 		Processo resultado = servico.alterarProcesso(processo);
 		return new ResponseEntity<>(resultado, HttpStatus.OK);

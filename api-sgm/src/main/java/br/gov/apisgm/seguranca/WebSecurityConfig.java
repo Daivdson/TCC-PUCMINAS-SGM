@@ -24,8 +24,9 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
   protected void configure(HttpSecurity http) throws Exception {
 
     http.csrf().disable();
+    http.cors().and();
 
-    http.sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS);
+    //http.sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS);
 
     http.authorizeRequests()//
 	    .antMatchers("/api/cidadao/iptu").permitAll()//
@@ -34,7 +35,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 	    .antMatchers("/h2-console/**/**").permitAll()
         .anyRequest().authenticated();
 
-    http.exceptionHandling().accessDeniedPage("/login");
+    http.exceptionHandling().accessDeniedPage("/");
 
     http.apply(new JwtTokenFilterConfigurer(jwtTokenProvider));
 
@@ -53,11 +54,5 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
         .ignoring()
         .antMatchers("/h2-console/**/**");;
   }
-
-  @Bean
-  public PasswordEncoder passwordEncoder() {
-    return new BCryptPasswordEncoder(12);
-  }
-
 
 }
