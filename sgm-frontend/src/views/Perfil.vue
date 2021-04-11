@@ -21,6 +21,9 @@
 <script>
 export default {
   name: 'Profile',
+  mounted() {
+     this.$store.dispatch('auth/verificar');
+  },
   computed: {
     currentUser() {
       return this.$store.state.auth.user

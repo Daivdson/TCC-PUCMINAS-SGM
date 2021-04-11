@@ -40,6 +40,12 @@ export const router = new Router({
       component: () => import('./views/FormularioProtocolos.vue')
     },
     {
+      path: '/protocolo/',
+      name: 'FomularioProtocolo',
+      // lazy-loaded
+      component: () => import('./views/FormularioProtocolos.vue')
+    },
+    {
       path: '/servico-cidadao',
       name: 'servicoCidadao',
       // lazy-loaded
@@ -53,7 +59,7 @@ router.beforeEach((to, from, next) => {
   const rotasPublicas = ['/','/login', '/servico-cidadao', '/home'];
   const rotaSolicitada = to.path;
   const isAutenticacao = !rotasPublicas.includes(rotaSolicitada);
-
+  
   if(isAutenticacao && !user) {
     next('/login');
   }

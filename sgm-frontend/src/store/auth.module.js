@@ -14,8 +14,8 @@ export const auth = {
       AuthService.login(user).then(
         user => {
           if(!user.error){
-            router.push('/');
             commit('loginSuccess', user);
+            router.push('/');
           } else {
             commit('loginFailure', user);
           }
@@ -29,7 +29,19 @@ export const auth = {
     logout({ commit }) {
       AuthService.logout();
       commit('logout');
-    }
+    },
+    verificar({commit}) {
+      AuthService.verificar().then(
+        res => {
+          if(res.error){
+            //commit('logout');
+          }
+        },
+        () => {
+          //commit('logout');
+        }
+      );
+    },
   },
   mutations: {
     loginSuccess(state, user) {

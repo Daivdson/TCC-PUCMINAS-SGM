@@ -26,7 +26,8 @@
             <label for="" class="form-label">Tipo de serviço:</label>
             <v-select  v-model="selected" :options="options" />
           </div>
-          <button type="submit" class="btn btn-primary">Submit</button>
+          <button v-if="alteracao" type="submit" class="btn btn-primary">Alterar</button>
+          <button v-if="!alteracao" type="submit" class="btn btn-primary">Criar</button>
         </form>
       </div>
     </div>
@@ -64,6 +65,9 @@ export default {
       return this.$store.state.auth.user;
     }
   },
+  mounted() {
+     this.$store.dispatch('auth/verificar');
+  },
    methods: {
     isAlterar() {
       if(this.$route.params.idProcesso) {
@@ -81,7 +85,6 @@ export default {
     modeloProcesso(){
       return {
         id: this.idProcesso,
-        status: this.status,
         responsavel: this.responsavel,
         solicitante: this.solicitante,
         telefone: this.telefone,
@@ -92,9 +95,8 @@ export default {
       let processoModificado = this.modeloProcesso()
       processo.alterarProcesso(processoModificado).then(
         response => {
-          console.log(response)
           if(!response.error){
-            console.log('alterou: ' + response)
+            this.$router.push('/protocolos');
           }
         },
         error => {
@@ -110,7 +112,7 @@ export default {
       processo.criarProcesso(processoCriado).then(
         response => {
           if(!response.error){
-            console.log('crirou: ' + response)
+           this.$router.push('/protocolos');
           }
         },
         error => {

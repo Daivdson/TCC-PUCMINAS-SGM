@@ -9,7 +9,7 @@
       </div>
     </transition>
     <div class="row">
-      <div class="col-8 col-sm-6">
+      <div class="col-sm-6 mb-3">
           <div class="borda">
             <form name="form" @submit.prevent="consultarIptu">
                 <div class="form-group">
@@ -24,13 +24,13 @@
             </form>
           </div>
       </div>
-      <div class="col-8 col-sm-6">
+      <div class="col-sm-6 mb-3">
         <div class="borda">
           <form name="form" @submit.prevent="consultarItr">
             <div class="form-group">
               <label for="username">Itr</label>
               <input v-model="nirt" type="text" class="form-control" name="nirt"/>
-              <div class="form-group mt-2 col-4 ">
+              <div class="form-group mt-2 ">
                   <button class="btn  btn-secondary" >
                     <span>Consultar</span>
                   </button>

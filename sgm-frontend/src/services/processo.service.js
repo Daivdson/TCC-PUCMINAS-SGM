@@ -2,15 +2,13 @@ import axios from 'axios';
 import profile from '../profile/profile-dev.json';
 import authHeader from './auth-header';
 
-const API_URL = profile.urlApiSgm;
+const API_URL = profile.urlApiSgm+'/tes';
 
 class Sgm {
-    criarProcesso(processo) {
-        return axios.request({
-            url: API_URL + '/processo',
-            method: 'post',
+    criarProcesso(processoForm) {
+        return axios.get(API_URL + '/processo/n/',{
             headers: authHeader,
-            data: processo
+            params: processoForm
           })
         .then(response => {
             return response.data;
@@ -20,11 +18,9 @@ class Sgm {
     }
 
     alterarProcesso(processo) {
-        console.log(authHeader)
-        console.log(processo)
-        return axios.put(API_URL + '/processo/',{
+        return axios.get(API_URL + '/processo/a/',{
             headers: authHeader,
-            data: processo
+            params: processo
           })
         .then(response => {
             return response.data;
@@ -34,9 +30,7 @@ class Sgm {
     }
 
     aprovarProcesso(numProcesso) {
-        return axios.request({
-            url: API_URL + '/processo/' + numProcesso + 'aprovar',
-            method: 'patch',
+        return axios.get(API_URL + '/processo/' + numProcesso + '/aprovar',{
             headers: authHeader
           })
         .then(response => {
