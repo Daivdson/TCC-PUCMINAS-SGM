@@ -35,7 +35,7 @@
             v-if="errors.has('password')"
             class="alert alert-danger"
             role="alert"
-          >Password is required!</div>
+          >Informe senha</div>
         </div>
         <div class="form-group">
           <button class="btn btn-primary btn-block" >
@@ -88,10 +88,10 @@ export default {
         if (this.user.username && this.user.password) {
           this.$store.dispatch('auth/login', this.user);
         }
-        
         if(!this.loggedIn){
           this.message = 'Falha na autenticacao'
         }
+        
       });
     }
   }

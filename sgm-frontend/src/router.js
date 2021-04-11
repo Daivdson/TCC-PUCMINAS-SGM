@@ -34,6 +34,12 @@ export const router = new Router({
       component: () => import('./views/Protocolos.vue')
     },
     {
+      path: '/protocolo/:idProcesso',
+      name: 'FomularioProtocolo',
+      // lazy-loaded
+      component: () => import('./views/FormularioProtocolos.vue')
+    },
+    {
       path: '/servico-cidadao',
       name: 'servicoCidadao',
       // lazy-loaded
