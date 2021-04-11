@@ -12,12 +12,6 @@ import br.gov.apisgm.aplicacao.repositorio.RepositorioProcesso;
 @Configuration
 public class RepositorioConfiguracao {
 
-//	@Value("${spring.elasticsearch.jest.uris}")
-//	private String[] esUrls;
-//
-//	@Autowired
-//	ResourceLoader resourceLoader;
-	
 	@Bean
 	public RepositorioCidadao repositorioCidadao() {
 		return new IntegracaoSatur();

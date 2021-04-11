@@ -3,15 +3,14 @@ package br.gov.apisgm.adaptadores.controlador;
 import java.util.List;
 
 import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
-import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PatchMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
-import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
@@ -25,8 +24,7 @@ import springfox.documentation.spring.web.json.Json;
 
 
 @RestController
-@CrossOrigin
-@RequestMapping(value = "api/processo", produces = { "application/json" })
+@RequestMapping(value = "api/processo" , produces = {MediaType.APPLICATION_JSON_VALUE})
 public class ProcessoCidadaoCtrl {
 
 	private ServicoProcesso servico;
@@ -36,13 +34,13 @@ public class ProcessoCidadaoCtrl {
 		this.servico = servico;
 	}
 
-	@GetMapping(value = { "/" }, produces = {"application/json"})
+	@GetMapping(value = { "/" })
 	public @ResponseBody ResponseEntity<?> processo() { 
 		List<Processo> resultado = servico.todosProcessos();
 		return new ResponseEntity<>(resultado, HttpStatus.OK);
 	}
 	
-	@GetMapping(value = { "/{idProcesso}" }, produces = {"application/json"})
+	@GetMapping(value = { "/{idProcesso}" })
 	public @ResponseBody ResponseEntity<?> processoPorId(@PathVariable("") String idProcesso) {
 		if(idProcesso == null) {
 			return new ResponseEntity<>(new Json("{\"Id do processo não informado\"}"), HttpStatus.BAD_REQUEST);
@@ -51,16 +49,34 @@ public class ProcessoCidadaoCtrl {
 		return new ResponseEntity<>(resultado, HttpStatus.OK);
 	}
 	
-	@PostMapping(value = { "/" }, produces = {"application/json"})
-	public @ResponseBody ResponseEntity<?> novoProcesso(@RequestBody Processo processo) {
-		Processo resultado = servico.novoProcesso(processo);
-		return new ResponseEntity<>(resultado, HttpStatus.OK);
+	@PostMapping(value = { "/" })
+	public @ResponseBody ResponseEntity<?> novoProcesso(DtoProcesso dto) {
+		Processo processo = Processo.builder()
+				.id(dto.getId())
+				.responsavel(dto.getResponsavel())
+				.solicitante(dto.getSolicitante())
+				.telefone(dto.getTelefone())
+				.tipoServico(dto.getTipoServico())
+				.build();
+		servico.novoProcesso(processo);
+		return new ResponseEntity<>("Processo criado", HttpStatus.OK);
 	}
 	
-	@PutMapping(value = { "/" }, produces = {"application/json"})
-	public @ResponseBody ResponseEntity<?> alterarProcesso(@RequestBody Processo processo) {
-		Processo resultado = servico.alterarProcesso(processo);
-		return new ResponseEntity<>(resultado, HttpStatus.OK);
+	@PutMapping(value = { "/" })
+	public  ResponseEntity<?> alterarProcesso(DtoProcesso dto) {
+		Processo processo = Processo.builder()
+				.id(dto.getId())
+				.responsavel(dto.getResponsavel())
+				.solicitante(dto.getSolicitante())
+				.telefone(dto.getTelefone())
+				.tipoServico(dto.getTipoServico())
+				.build();
+		try {
+			servico.alterarProcesso(processo);
+			return new ResponseEntity<>("Processo alterado", HttpStatus.OK);
+		} catch (Exception e) {
+			return new ResponseEntity<>(new Json("{\"error\": \"Erro ao alterar processo\"}"), HttpStatus.BAD_REQUEST);
+		}
 	}
 	
 	@PatchMapping(value = { "/{idProcesso}/aprovar" })

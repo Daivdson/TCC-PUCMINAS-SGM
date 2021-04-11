@@ -34,8 +34,13 @@ public class ServicoProcesso {
 
 	public Processo alterarProcesso(Processo processo) {
 		processo.analise();
+		return editarProcessoBase(processo);
+	}
+	
+	private Processo editarProcessoBase(Processo processo) {
 		return repositorio.alterarProcesso(processo);
 	}
+
 
 	public boolean aprovarProcesso(String idProcesso) {
 		
@@ -44,7 +49,7 @@ public class ServicoProcesso {
 			
 			processo.aprovado();
 			
-			alterarProcesso(processo);
+			editarProcessoBase(processo);
 			
 			return true;
 			
